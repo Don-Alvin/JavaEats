@@ -4,16 +4,25 @@ import './global.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
 import AuthProviderWithNavigate from './auth/AuthProviderWithNavigate'
-import { QueryClient } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-const queryClient = new QueryClient({})
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
-      <AuthProviderWithNavigate>
-        <AppRoutes />
-      </AuthProviderWithNavigate>
+      <QueryClientProvider client={queryClient}>
+        <AuthProviderWithNavigate>
+          <AppRoutes />
+        </AuthProviderWithNavigate>
+      </QueryClientProvider>
+      
     </Router>
   </React.StrictMode>,
 )
