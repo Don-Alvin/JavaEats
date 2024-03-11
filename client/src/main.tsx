@@ -4,6 +4,9 @@ import './global.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
 import AuthProviderWithNavigate from './auth/AuthProviderWithNavigate'
+import { QueryClient } from '@tanstack/react-query'
+
+const queryClient = new QueryClient({})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
